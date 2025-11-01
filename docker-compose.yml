@@ -1,0 +1,51 @@
+services:
+  # 1. El Servicio de Base de Datos
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-u", "root", "-padmin"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  # 2. El Servicio de Productos
+  producto-service:
+    build:
+      context: ./producto 
+      dockerfile: Dockerfile
+    container_name: producto
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/productos_db?createDatabaseIfNotExist=true
+      CLIENT_INVENTARIO_SERVICE_URL: http://inventario-service:8082
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+
+  # 3. El Servicio de Inventario
+  inventario-service:
+    build:
+      context: ./inventario
+      dockerfile: Dockerfile
+    container_name: inventario
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/inventarios_db?createDatabaseIfNotExist=true
+      CLIENT_PRODUCTO_SERVICE_URL: http://producto-service:8081
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+
+# Define el volumen para persistir los datos de MySQL
+volumes:
+  mysql_data:

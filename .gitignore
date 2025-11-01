@@ -1,0 +1,26 @@
+# Archivos compilados de Java
+*.class
+*.jar
+*.war
+/target/
+/build/
+
+# Archivos de IDEs
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# Archivos de Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Logs
+logs/
+*.log
+
+# Archivos de Sistema Operativo
+.DS_Store
+Thumbs.db
