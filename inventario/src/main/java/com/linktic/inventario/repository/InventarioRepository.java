@@ -10,6 +10,4 @@ import java.util.Optional;
 public interface InventarioRepository extends JpaRepository<Inventario, Long> {
     
     Optional<Inventario> findByProductoId(Long productoId);
-
-    void deleteByProductoId(Long productoId);
 }

@@ -1,6 +1,8 @@
 package com.linktic.inventario.model;
 
 import com.toedter.spring.hateoas.jsonapi.JsonApiId;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +15,7 @@ import javax.persistence.Id;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Inventario {
 
     @Id

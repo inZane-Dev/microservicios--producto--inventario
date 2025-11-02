@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,6 +31,7 @@ public class ProductoServiceClient {
         maxAttempts = 2, 
         backoff = @Backoff(delay = 1000)
     )
+    @GetMapping("/productos/internal/{id}")
     public ProductoDto obtenerProducto(Long productoId) {
         String url = productoServiceUrl + "/productos/internal/" + productoId;
 

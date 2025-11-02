@@ -16,4 +16,9 @@ public class InventarioResponseDto {
     private int cantidad;
 
     private ProductoDto producto;
+
+    public InventarioResponseDto(int cantidad, ProductoDto producto) {
+        this.cantidad = cantidad;
+        this.producto = producto;
+    }
 }

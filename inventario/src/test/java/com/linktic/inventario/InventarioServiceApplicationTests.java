@@ -1,4 +1,4 @@
-package com.linktic.inventario_service;
+package com.linktic.inventario;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
